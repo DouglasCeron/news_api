@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/cases/login/domain/entities/login_entity.dart';
 import 'package:news_app/cases/login/domain/use_cases/login_usecase.dart';
+import 'package:news_app/features/presentations/news/page/news_page.dart';
 import 'package:news_app/shared/base/base_resources/app_strings.dart';
 import 'package:news_app/shared/base/base_response/base_response.dart';
 import 'package:news_app/shared/base/base_state/screen_base_state.dart';
+import 'package:news_app/structure/routes/routes.dart';
 
 class LoginController extends GetxController {
   LoginUseCase _loginUseCase;
@@ -15,6 +17,11 @@ class LoginController extends GetxController {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  setInitVariables(){
+    emailController.text = 'diego.pontes@newsapp.com.br';
+    passwordController.text = '123456';
+  }
 
   Future<void> onLoginButtonPressed() async {
     updateScreenState(BaseState.loading);
@@ -27,15 +34,11 @@ class LoginController extends GetxController {
 
   void checkBaseResponse(BaseResponse baseResponse) {
     if (baseResponse is SuccessResponse) {
-      bool isUserLogged = baseResponse.response;
+      bool isUserLogged = baseResponse.data;
       if (isUserLogged) {
         screenResponseText = AppStrings.loggedUserMessage;
-        showSnackBar(
-          title: screenResponseText,
-          content: AppStrings.welcomeMessage,
-          backGroundColor: Colors.blue
-        );
         print('Mensagem de sucesso: $screenResponseText');
+        Get.toNamed(Routes.newsRoute);
       }
     } else if (baseResponse is FailureResponse) {
       screenResponseText = baseResponse.errorMessage;

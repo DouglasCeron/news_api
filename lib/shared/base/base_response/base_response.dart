@@ -2,8 +2,8 @@ abstract class BaseResponse {}
 
 class SuccessResponse<T> extends BaseResponse {
 
-  T response;
-  SuccessResponse(this.response);
+  T data;
+  SuccessResponse(this.data);
 }
 
 class FailureResponse extends BaseResponse {

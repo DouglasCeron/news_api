@@ -10,6 +10,9 @@ class LoginPage extends GetWidget<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<LoginController>(
+        initState: (_){
+          controller.setInitVariables();
+        },
         builder: (_) => Container(
           child: Stack(
             children: <Widget>[
