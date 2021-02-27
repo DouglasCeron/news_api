@@ -13,6 +13,7 @@ class NewsCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         print('Toque na tela no artigo de index: $index');
+        Get.toName();
       },
       child: Container(
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
