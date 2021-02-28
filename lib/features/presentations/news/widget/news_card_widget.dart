@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:news_app/cases/news/domain/entities/article_entity.dart';
 
-class NewsCardWidget extends StatelessWidget {
+import '../../../../structure/routes/routes.dart';
+import '../../news_select/page/new_select.dart';
 
+class NewsCardWidget extends StatelessWidget {
   final ArticleEntity articleEntity;
   final int index;
 
@@ -11,9 +14,10 @@ class NewsCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         print('Toque na tela no artigo de index: $index');
-        Get.toName();
+        Get.to(NewSelectPage(articleEntity, index));
+        //Get.toNamed(Routes.newsSelectRoute);
       },
       child: Container(
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -26,7 +30,8 @@ class NewsCardWidget extends StatelessWidget {
                 border: Border.all(
                   color: Colors.transparent,
                 ),
-                borderRadius: BorderRadius.circular(8), // use instead of BorderRadius.all(Radius.circular(20))
+                borderRadius: BorderRadius.circular(8),
+                // use instead of BorderRadius.all(Radius.circular(20))
                 image: DecorationImage(
                   image: NetworkImage(articleEntity.urlToImage),
                   fit: BoxFit.cover,
@@ -42,7 +47,10 @@ class NewsCardWidget extends StatelessWidget {
                   Container(
                     child: Text(
                       '$index.',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.blue),
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.blue),
                     ),
                     alignment: Alignment.topCenter,
                   ),
@@ -57,7 +65,8 @@ class NewsCardWidget extends StatelessWidget {
                             margin: EdgeInsets.only(bottom: 10),
                             child: Text(
                               articleEntity.author ?? 'Autor Indefinido',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w800),
                             ),
                           ),
                           Container(
@@ -77,7 +86,9 @@ class NewsCardWidget extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 10),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  articleEntity.publishedAt != null ? 'Publicado em: ' : 'Sem data de publicação.',
+                                  articleEntity.publishedAt != null
+                                      ? 'Publicado em: '
+                                      : 'Sem data de publicação.',
                                   style: TextStyle(fontWeight: FontWeight.w800),
                                 ),
                               ),

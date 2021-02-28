@@ -8,7 +8,7 @@ class LoginLocalDataSource {
   String savedPassword = '123456';
 
   Future<BaseResponse> loginUserLocally(LoginModel loginModel) async {
-    await Future.delayed(Duration(seconds: 5));
+    //await Future.delayed(Duration(seconds: 5));
     BaseResponse localResponse = checkCredentials(loginModel);
     return localResponse;
   }
