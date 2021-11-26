@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/cases/news/domain/entities/article_entity.dart';
-
+import 'package:news_app/features/presentations/detail_news/page/detail_news.dart';
 import '../../../../structure/routes/routes.dart';
-import '../../news_select/page/new_select.dart';
 
 class NewsCardWidget extends StatelessWidget {
   final ArticleEntity articleEntity;
@@ -16,8 +15,8 @@ class NewsCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print('Toque na tela no artigo de index: $index');
-        Get.to(NewSelectPage(articleEntity, index));
-        //Get.toNamed(Routes.newsSelectRoute);
+        //Get.to(DetailNews(articleEntity, index));
+        Get.toNamed(Routes.detailNews, arguments: [articleEntity, index]);
       },
       child: Container(
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),

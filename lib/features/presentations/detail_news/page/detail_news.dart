@@ -8,7 +8,7 @@ import '../../../../shared/base/base_resources/app_strings.dart';
 import '../../news/controller/news_controller.dart';
 import '../../news/controller/news_controller.dart';
 
-class NewsSelectPage extends GetWidget<NewsController> {
+class DetailNews extends GetWidget<NewsController> {
 
   ArticleEntity articleEntity;
   int index;
@@ -39,7 +39,7 @@ class NewsSelectPage extends GetWidget<NewsController> {
             height: 200,
             foregroundDecoration: BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 image: NetworkImage(articleEntity.urlToImage),
               ),
             ),
@@ -89,10 +89,11 @@ class NewsSelectPage extends GetWidget<NewsController> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     articleEntity.description,
+                    textAlign: TextAlign.start,
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 )
@@ -101,6 +102,7 @@ class NewsSelectPage extends GetWidget<NewsController> {
           ),
         ],
       ),
+
       ),
     );
   }
