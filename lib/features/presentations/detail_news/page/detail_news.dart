@@ -1,28 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/shared/base/base.date/base_date.dart';
+import '../../../../cases/news/domain/entities/article_entity.dart';
 import '../../../../cases/news/domain/entities/article_entity.dart';
 import '../../../../shared/base/base_resources/app_strings.dart';
 import '../../news/controller/news_controller.dart';
+import '../../news/controller/news_controller.dart';
 
-class NewSelectPage extends GetWidget<NewsController> {
-  final ArticleEntity articleEntity;
-  final int index;
+class NewsSelectPage extends GetWidget<NewsController> {
 
-  NewSelectPage(this.articleEntity, this.index);
+  ArticleEntity articleEntity;
+  int index;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Noticias do ${articleEntity.author}',
-          style: TextStyle(color: Colors.black),
+    return GetBuilder<NewsController>(
+      initState: (_) {
+        this.articleEntity = Get.arguments[0];
+        this.index = Get.arguments[1];
+      },
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Noticias de ${articleEntity.author}',
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
         ),
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
+
       body: Column(
         children: [
           Container(
@@ -59,27 +69,30 @@ class NewSelectPage extends GetWidget<NewsController> {
                     Container(
                       padding: EdgeInsets.only(top: 10),
                       alignment: Alignment.centerLeft,
-                      child: Text(articleEntity.publishedAt ?? ''),
+                      child: Text(
+                          BaseDate.dateConverter(articleEntity.publishedAt)),
                     ),
                   ],
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 10),
                   alignment: Alignment.centerLeft,
-                  child: Text(articleEntity.author ?? 'Sem autor',
+                  child: Text(
+                    articleEntity.author ?? 'Sem autor',
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 10),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Conteudo',
+                    articleEntity.description,
                     style: TextStyle(
-                      fontWeight: FontWeight.w800,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 )
@@ -87,6 +100,7 @@ class NewSelectPage extends GetWidget<NewsController> {
             ),
           ),
         ],
+      ),
       ),
     );
   }
